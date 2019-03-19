@@ -25,8 +25,8 @@
 <script type="text/javascript">
 //  VARIABLES
 //  --------------------------------------------
-    // API Key to GIPHY
-    var authKey = "1bNGrlJ2oTvuncnETFmqLXNtUA7R8kr2";
+    
+var spArray = ["Mr. Garrison", "Kyle", "Stan", "Kenny", "Cartman", "Mr. Slave", "Randy Marsh", "Butters", "Tweak", "Token", "Towelie", "Mr. Hankey", "Ike", "Chef", "Canadians"];
 
 //  FUNCTIONS
 //  --------------------------------------------
@@ -35,18 +35,24 @@
         var x = $(this).data("search");
         console.log(x);
 
-        var queryURL = "https://api.giphy.com/v1/gifs/search?&q=" + x + "&api_key=1bNGrlJ2oTvuncnETFmqLXNtUA7R8kr2&limit=10"; 
+        var queryURL = "https://api.giphy.com/v1/gifs/search?&q=south%20park%20" + x + "&api_key=1bNGrlJ2oTvuncnETFmqLXNtUA7R8kr2&limit=10"; 
         console.log(queryURL);
-    })
-
-    // Using ajax to access the south park GIPHY API
-    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=1bNGrlJ2oTvuncnETFmqLXNtUA7R8kr2&q=south%20park&limit=10&offset=0&rating=G&lang=en"; 
-    // AJAX request
-    $.ajax({url:queryURL, method:'GET'})
-        .done(function(response) {
+    // Using ajax to access the GIPHY API
+    // AJAX request     
+        $.ajax({url:queryURL, method:'GET'})
+            .done(function(response) {
             console.log(response);
+            for (var i = 0; i < response.data.length; i++){
+                $("#spGifs").prepend("<p>Rating: " + response.data[i].rating + "</p>");
+                $("#spGifs").prepend("<img src= '" + response.data[i].images.fixed_width.url + "'>");
+            }
+            
         })
 
+    })
+
+    
+   
 </script>
 
 </body>
