@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>South Park - GifTastic</title>
+</head>
+<body>
+    
+<div id = "buttons-list">
+    <button data-search="randy-marsh">Randy Marsh</button>
+    <button data-search="mr-slave">Mr. Slave</button>
+</div>
+
+<form id="item-search">
+    <label for="searchBar"></label>
+    <input type="text" id="searchBar">
+
+    <input type="submit" id="submit-button">
+</form>
+
+<div id= "spGifs">
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+//  VARIABLES
+//  --------------------------------------------
+    // API Key to GIPHY
+    var authKey = "1bNGrlJ2oTvuncnETFmqLXNtUA7R8kr2";
+
+//  FUNCTIONS
+//  --------------------------------------------
+    // On click event to display 10 gifs relating to the word on the button
+    $("button").on("click", function() {
+        var x = $(this).data("search");
+        console.log(x);
+
+        var queryURL = "https://api.giphy.com/v1/gifs/search?&q=" + x + "&api_key=1bNGrlJ2oTvuncnETFmqLXNtUA7R8kr2&limit=10"; 
+        console.log(queryURL);
+    })
+
+    // Using ajax to access the south park GIPHY API
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=1bNGrlJ2oTvuncnETFmqLXNtUA7R8kr2&q=south%20park&limit=10&offset=0&rating=G&lang=en"; 
+    // AJAX request
+    $.ajax({url:queryURL, method:'GET'})
+        .done(function(response) {
+            console.log(response);
+        })
+
+</script>
+
+</body>
+</html>
